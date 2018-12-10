@@ -26,20 +26,34 @@
 
     function addMarkersToMap(map) {
 
-        @if (isset($lat) && isset($lng))
-            var localitations = new H.map.Marker({lat:'{{$lat}}', lng:'{{$lng}}',zoom:10});
-            map.addObject(localitations);
-        @else
-            post($url.verGps,{},'GET').then(data =>{
-                var ubicacion = data.ubicacion;
-                if(ubicacion == null){
-                    window.location.href = "/";
-                }
-                for(var i in ubicacion){
-                    var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
-                    map.addObject(localitations);
-                }
-            });
+        @if(!empty(request()->get("map")))
+            @if(request()->get("map") == "all")
+                post($url.ubicaciones,{},'GET').then(data =>{
+                    var ubicacion = data.ubicacion;
+                    if(ubicacion == null){
+                        window.location.href = "/";
+                    }
+                    for(var i in ubicacion){
+                        var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
+                        map.addObject(localitations);
+                    }
+                });
+            @endif
+            @if (isset($lat) && isset($lng))
+                var localitations = new H.map.Marker({lat:'{{$lat}}', lng:'{{$lng}}',zoom:10});
+                map.addObject(localitations);
+                @else
+                post($url.verGps,{},'GET').then(data =>{
+                    var ubicacion = data.ubicacion;
+                    if(ubicacion == null){
+                        window.location.href = "/";
+                    }
+                    for(var i in ubicacion){
+                        var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
+                        map.addObject(localitations);
+                    }
+                });
+            @endif
         @endif
     }
     /**
@@ -64,19 +78,19 @@
        var map = new H.Map(document.getElementById('map'),
         defaultLayers.normal.map,{
             center: {lat:'{{$lat}}', lng:'{{$lng}}'},
-            zoom: 6,
+            zoom: 7,
             pixelRatio: pixelRatio,
-
         });
       @else
-         var map = new H.Map(document.getElementById('map'),
-          defaultLayers.normal.map,{
-              center: {lat:4.5981, lng:-74.0758},
-              zoom: 6,
+        var lat   = localStorage.lat == null ? '4.5981' :  localStorage.lat;
+        var lng   = localStorage.lng == null ? '-74.0758' :  localStorage.lng;
+        var map = new H.Map(document.getElementById('map'),
+            defaultLayers.normal.map,{
+              center: {lat:lat, lng:lng},
+              zoom: 7,
               pixelRatio: pixelRatio
           });
     @endif
-
 
     //Step 3: make the map interactive
     // MapEvents enables the event system
