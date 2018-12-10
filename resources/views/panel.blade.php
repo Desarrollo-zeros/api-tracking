@@ -329,12 +329,12 @@
     $(document).ready(function () {
         addurl();url();ulrData();
         $url = JSON.parse(localStorage.dataUrl);
-        var s = window.location.href.split("?")[1].split("&");
-        if(s != null){
-            localStorage.lat = s[0].split("lat")[1];
-            localStorage.lat = localStorage.lat.replace("=","");
-            localStorage.lng = s[1].split("lng")[1];
-            localStorage.lng = localStorage.lng.replace("=","");
+        if(window.location.href.split("?")[1] != null){
+            var s = window.location.href.split("?")[1].split("&");
+            localStorage.lat = s[0].split("lat")[1].replace("=","");
+            //localStorage.lat = localStorage.lat.replace("=","");
+            localStorage.lng = s[1].split("lng")[1].replace("=","");
+            //localStorage.lng = localStorage.lng.replace("=","");
         }
         var gps = window.location.href.split("?")[1] == null ? '' : "?"+window.location.href.split("?")[1];
 

@@ -26,35 +26,41 @@
 
     function addMarkersToMap(map) {
 
-        @if(!empty(request()->get("map")))
-            @if(request()->get("map") == "all")
+
+        var vMpa =  '{{request()->get("map")}}';
+        var lat = '{{request()->get("lat")}}';
+        var lng = '{{request()->get("lng")}}';
+
+
+        if(vMpa != null){
+            if(vMpa == "all"){
                 post($url.ubicaciones,{},'GET').then(data =>{
                     var ubicacion = data.ubicacion;
                     if(ubicacion == null){
-                        window.location.href = "/";
+                        //window.location.href = "/";
                     }
                     for(var i in ubicacion){
                         var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
                         map.addObject(localitations);
                     }
                 });
-            @endif
-            @if (isset($lat) && isset($lng))
-                var localitations = new H.map.Marker({lat:'{{$lat}}', lng:'{{$lng}}',zoom:10});
-                map.addObject(localitations);
-                @else
-                post($url.verGps,{},'GET').then(data =>{
-                    var ubicacion = data.ubicacion;
-                    if(ubicacion == null){
-                        window.location.href = "/";
-                    }
-                    for(var i in ubicacion){
-                        var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
-                        map.addObject(localitations);
-                    }
-                });
-            @endif
-        @endif
+            }
+        }
+        else if(lat != null && lng != null){
+            var localitations = new H.map.Marker({lat:lat, lng:lng});
+            map.addObject(localitations);
+        }else{
+            post($url.verGps,{},'GET').then(data =>{
+                var ubicacion = data.ubicacion;
+                if(ubicacion == null){
+                    window.location.href = "/";
+                }
+                for(var i in ubicacion){
+                    var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
+                    map.addObject(localitations);
+                }
+            });
+        }
     }
     /**
      * Boilerplate map initialization code starts below:
@@ -108,12 +114,18 @@
 
 
 <script>
-    $(document).ready(function () {
+
+    function auth(){
         post($url.estado,{},'GET').then(data => {
             if(!data.estado){
-                window.location.href = "/";
+                //window.location.href = "/";
             }
         });
+    }
+
+    $(document).ready(function () {
+        $url = JSON.parse(localStorage.dataUrl);
+        auth();
     });
 </script>
 </body>

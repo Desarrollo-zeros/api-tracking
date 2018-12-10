@@ -66,7 +66,7 @@ function ulrData(){
         "guardarPersona" : localStorage.url+"/api/users/guardarPersona",
         "actualizarPersona" : localStorage.url+"/api/users/actualizarPersona",
         "verGps" : localStorage.url+"/api/users/verGps",
-        "ubicaciones" : localStorage+"api/users/ubicaciones"
+        "ubicaciones" : localStorage.url+"/api/users/ubicaciones"
     });
 }
 
