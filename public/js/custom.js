@@ -8,11 +8,7 @@ let post = (url = "",data = {},method = "",csrf_token = '') =>{
                 method: method, // or 'PUT'
                 headers:{
                     "Content-Type": "application/json; charset=utf-8",
-                    'mode': 'cors',
-                    'authorization' : 'Bearer '+localStorage.authorization,
-                    "X-CSRF-TOKEN" : csrf_token,
-                    "Access-Control-Allow-Origin" : "*",
-                    "Access-Control-Request-Headers" : 'GET'
+                    'Authorizations' : 'Bearer '+localStorage.authorization,
                 },
                 redirect: "follow", // manual, *follow, error
                 referrer: "no-referrer", // no-referrer, *client
@@ -31,11 +27,7 @@ let post = (url = "",data = {},method = "",csrf_token = '') =>{
                 method: method, // or 'PUT'
                 headers:{
                     "Content-Type": "application/json; charset=utf-8",
-                    'mode': 'cors',
-                    'Authorization' : 'Bearer '+localStorage.authorization,
-                    "X-CSRF-TOKEN" : csrf_token,
-                    "Access-Control-Allow-Origin" : "*",
-                    "Access-Control-Request-Headers" : 'GET'
+                    'Authorizations' : 'Bearer '+localStorage.authorization,
                 },
                 redirect: "follow", // manual, *follow, error
                 referrer: "no-referrer", // no-referrer, *client
