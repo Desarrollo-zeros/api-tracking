@@ -65,20 +65,18 @@
         ppi: pixelRatio === 1 ? undefined : 320
     });
     //Step 2: initialize a map - this map is centered over Europe
-
-
         if(localStorage.lat == null && localStorage.lng == null){
             var map = new H.Map(document.getElementById('map'),
                 defaultLayers.normal.map,{
                     center: {lat:4.5981, lng:-74.0758},
-                    zoom: 2,
+                    zoom: 6,
                     pixelRatio: pixelRatio
                 });
         }else{
             var map = new H.Map(document.getElementById('map'),
                 defaultLayers.normal.map,{
                     center: {lat:localStorage.lat, lng:localStorage.lng},
-                    zoom: 8,
+                    zoom: 6,
                     pixelRatio: pixelRatio
                 });
         }
