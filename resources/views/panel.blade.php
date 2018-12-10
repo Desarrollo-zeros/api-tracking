@@ -319,7 +319,8 @@
 <script>
 
     $(document).ready(function () {
-        post($url.estado,{},'GET').then(data => {
+        var gps = window.location.href.split("?")[1] == null ? '' : "?"+window.location.href.split("?")[1];
+        post($url.estado+gps,{},'GET').then(data => {
             if(!data.estado){
                 window.location.href = "/";
             }else{

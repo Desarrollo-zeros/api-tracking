@@ -66,12 +66,6 @@ function ulrData(){
 
 }
 
-
-function showPosition(position) {
-    localStorage.lat = position.coords.latitude;
-    localStorage.lng = position.coords.longitude;
-}
-
 function loaderPerson() {
     post($url.persona,{"id":$("#userId").val()},'GET',).then(data => {
         if(data.estado == true){

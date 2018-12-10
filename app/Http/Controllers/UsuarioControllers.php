@@ -62,8 +62,6 @@ class UsuarioControllers extends Controller
             $persona = $this->usuario->obtenerPersonaDeUsuario($users["userData"]["id"]);
             if(isset($persona)){
                 $this->ubicacion = new Ubicaciones();
-                //$this->ubicacion->guardar();
-                //return response()->json($this->ubicacion->guardar());
                 $ubicacion = $this->ubicacion->guardar();
             }
             return response()->json(["estado"=>true,"userData"=>$users["userData"],"csrf_token"=>csrf_token(),"ubicacion"=>$ubicacion]);

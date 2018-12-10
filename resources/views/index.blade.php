@@ -64,9 +64,29 @@
 
 
 <script>
+
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert()
+                alert("Usuario negó la solicitud de Geolocalización, para gestionar la ubicacion vuelva a cargar la pagina y permita conocer su ubicacion");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("La información de ubicación no está disponible.");
+                break;
+            case error.TIMEOUT:
+                alert("La solicitud para obtener la ubicación del usuario ha caducado.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
+
     function showPosition(position) {
         localStorage.lat = position.coords.latitude;
-        localStorage.lgn= position.coords.longitude;
+        localStorage.lng= position.coords.longitude;
     }
 
     $(document).ready(function () {
@@ -75,15 +95,15 @@
 
         if('{{env('GPS')}}' === 0){
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
+                navigator.geolocation.getCurrentPosition(showPosition,showError);
             }
         }
         var lat = localStorage.lat != null ? localStorage.lat: null;
         var lng = localStorage.lng != null ? localStorage.lng: null;
-        var uri = $url.estado+"/?lat="+lat+"&lng="+lng;
-        post(uri,{},'GET').then(data => {
-            if(!data.estado){
-               // window.location.href = "/";
+        var uri = "/?lat="+lat+"&lng="+lng;
+        post($url.estado,{},'GET').then(data => {
+            if(data.estado){
+                window.location.href = $url.panel+uri;
             }
         });
     });
@@ -128,6 +148,11 @@
     $("#formLogin").on("submit",function (form) {
         form.preventDefault();
         var data = {"username":$('#username').val(),"password":$('#password').val()};
+
+        var lat = localStorage.lat != null ? localStorage.lat: null;
+        var lng = localStorage.lng != null ? localStorage.lng: null;
+        var uri = "?lat="+lat+"&lng="+lng;
+
         post($url.iniciar,data,'POST').then(data => {
             $('.account').html(prettyPrintJson.toHtml(data));
             if(data.token.length > 1){
@@ -135,7 +160,7 @@
                 document.cookie = "token="+data.token;
                 $.notify("logearas en 5 segundos","success");
                 setTimeout(function () {
-                    setTimeout(window.location.href = $url.panel, 5000);
+                    setTimeout(window.location.href = $url.panel+uri, 5000);
                 }, 5000);
             }
         });
