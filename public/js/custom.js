@@ -1,3 +1,5 @@
+
+
 let post = (url = "",data = {},method = "",csrf_token = '') =>{
     switch (method) {
         case 'POST':

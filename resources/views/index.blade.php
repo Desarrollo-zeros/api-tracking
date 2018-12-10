@@ -68,6 +68,7 @@
 
     $(document).ready(function () {
         authorizacion();
+        localStorage.url = '{{request()->url()}}';
     });
 
 

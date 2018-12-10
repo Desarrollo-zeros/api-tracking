@@ -55,16 +55,22 @@ class Ubicaciones extends Model
         $gps = [];
         $ip = request()->ip() == "127.0.0.1" ? $this->ipDefaul :  request()->ip();
         $nowtime = time();
-        $oldtime = $this->all()->last()->hora;
-        if(env("gps") == 1){
-            if(($nowtime-$oldtime)>60){
-                foreach ($this->key as $key){
-                    $data = $this->obtenerUbicacionGoogle($key);
-                    if($data["estado"]){$gps = $data["localizacion"];break;}
+        $ubicacion = $this->all();
+
+        if(isset($ubicacion)){
+            $oldtime = !empty($ubicacion->last()) ? $ubicacion->last()->last() : 0;
+            if(env("gps") == 1){
+                if($oldtime > 0){
+                    if(($nowtime-$oldtime)>60){
+                        foreach ($this->key as $key){
+                            $data = $this->obtenerUbicacionGoogle($key);
+                            if($data["estado"]){$gps = $data["localizacion"];break;}
+                        }
+                    }
                 }
+            }else{
+                $gps = ["lat"=>request()->lat,"lng"=>request()->lng,"accuracy"=>""];
             }
-        }else{
-            $gps = ["lat"=>request()->lat,"lng"=>request()->lng,"accuracy"=>""];
         }
 
         $data = $this->registrarUbicacion($gps,$ip);
