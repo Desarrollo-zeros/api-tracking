@@ -63,7 +63,6 @@ function ulrData(){
         "verGps" : localStorage.url+"/api/users/verGps",
         "ubicaciones" : localStorage+"api/users/ubicaciones"
     });
-
 }
 
 function loaderPerson() {
