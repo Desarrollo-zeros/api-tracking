@@ -63,14 +63,20 @@
 
 
 <script>
-
-    localStorage.url = '{{request()->url()}}';
-
     $(document).ready(function () {
         authorizacion();
-        localStorage.url = '{{request()->url()}}';
+        url();
     });
 
+    function url(){
+        setTimeout(function () {
+            @if(env('APP_ENV') === 'dev')
+                localStorage.url = '{{env('APP_URL_API')}}';
+            @elseif(env('APP_ENV') === 'production')
+                localStorage.url = '{{request()->url()}}';
+            @endif
+        }, 1000);
+    }
 
     $("#btnRegister").click(function () {
         $("#formLogin").css("display","none");
