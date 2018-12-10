@@ -95,7 +95,11 @@
 
 <script>
     $(document).ready(function () {
-       authorizacion();
+        post($url.estado,{},'GET').then(data => {
+            if(!data.estado){
+                window.location.href = "/";
+            }
+        });
     });
 </script>
 </body>

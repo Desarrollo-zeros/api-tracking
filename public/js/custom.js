@@ -55,8 +55,8 @@ function ulrData(){
         "iniciar" : localStorage.url+"/api/users/iniciar",
         "registrar" : localStorage.url+"/api/users/registrar",
         "estado" : localStorage.url+"/api/users/estado",
-        "panel" : localStorage.url1+"/panel", //no api
-        "map" : localStorage.url1+"/map", //no api
+        "panel" : localStorage.url+"/panel", //no api
+        "map" : localStorage.url+"/map", //no api
         "persona" : localStorage.url+"/api/users/persona",
         "guardarPersona" : localStorage.url+"/api/users/guardarPersona",
         "actualizarPersona" : localStorage.url+"/api/users/actualizarPersona",
@@ -71,48 +71,6 @@ function showPosition(position) {
     localStorage.lat = position.coords.latitude;
     localStorage.lng = position.coords.longitude;
 }
-
-var authorizacion = () => {
-    try{
-        if(localStorage.authorization == null && window.location.href.split("#")[0] == $url.panel && window.location.href.split("#")[0] == $url.map){
-            window.location.href = "/";
-        }
-        if(localStorage.authorization != null && window.location.href.split("#")[0] == $url.panel){
-            /*if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-            }*/
-            post($url.estado,{},'GET').then(data => {
-                if(!data.estado){
-                    window.location.href = "/";
-                }
-                //$("#userId").val(data.userData.id);
-                $("#nameUser").html(data.userData.username);
-                $("#emailUser").html(data.userData.email);
-                $("#imgUser").attr("src",data.userData.img);
-                data.userData.token = localStorage.authorization;
-                $('.account').html(prettyPrintJson.toHtml(data.userData));
-            });
-        }
-
-        if(localStorage.authorization != null &&
-            window.location.href.split("#")[0] != $url.panel &&
-            window.location.href.split("?")[0] != $url.panel &&
-            window.location.href.split("/?")[0] != $url.panel &&
-            window.location.href.split("#")[0] != $url.map &&
-            window.location.href.split("?")[0] != $url.map &&
-            window.location.href.split("/?")[0] != $url.map){
-            post($url.estado,{},'GET').then(data => {
-                if(data.estado){
-                    window.location.href = $url.panel;
-                }
-            });
-        }
-
-
-    }
-    catch(e){return false;}
-};
-
 
 function loaderPerson() {
     post($url.persona,{"id":$("#userId").val()},'GET',).then(data => {
@@ -132,12 +90,25 @@ function loaderPerson() {
 }
 
 
+function fecha(timestamp) {
+    var date = new Date(timestamp*1000);
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    return (day+"/"+month+"/"+year+" "+ hours + ":" + minutes+":"+seconds);
+    //return (year + "/" + month + "/" + day + " " + hours + ":" + minutes);
+}
+
 function loaderTableuser(){
+
     post($url.verGps,{},'GET').then(data =>{
         var string = '';
         var ubicacion = data.ubicacion;
         for(var i in ubicacion){
-            var pais = '<td><img class="img-circle img-responsive" src="'+ubicacion[i].icono+'"/> <span class="fa fa-arrow-right"> '+ubicacion[i].pais+'</span></td>';
+            var pais = '<td><img class="img-circle img-responsive"  width="15" src="'+ubicacion[i].icono+'"/> <span class="fa fa-arrow-right"> '+ubicacion[i].pais_code+'</span></td>';
             string += '<tr>';
             string += '<th scope="row">'+ubicacion[i].id+'</th>';
             string += '<td>'+ubicacion[i].ip+'</td>';
@@ -145,6 +116,7 @@ function loaderTableuser(){
             string += '<td>'+ubicacion[i].moneda+'</td>';
             string += '<td>'+ubicacion[i].latitud+'</td>';
             string += '<td>'+ubicacion[i].longitud+'</td>';
+            string += '<td>'+fecha(ubicacion[i].hora)+'</td>';
             string += '<td><a target="_blank" href="/map/?lat='+ubicacion[i].latitud+'&lng='+ubicacion[i].longitud+'" class="btn btn-circle btn-info btn-sm"><span class="fa fa-map-marker">Ver Mapa</span></a></td>';
             string += '</tr>';
         }

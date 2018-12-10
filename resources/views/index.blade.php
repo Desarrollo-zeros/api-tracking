@@ -64,9 +64,13 @@
 
 <script>
     $(document).ready(function () {
-        authorizacion();
         addurl();url();ulrData();
         $url = JSON.parse(localStorage.dataUrl);
+        post($url.estado,{},'GET').then(data => {
+            if(!data.estado){
+                window.location.href = "/";
+            }
+        });
     });
 
     function addurl() {

@@ -267,6 +267,7 @@
                                                 <th>Moneda</th>
                                                 <th>latitud</th>
                                                 <th>Longitud</th>
+                                                <th>Fecha</th>
                                                 <th>Ver Donde estuve</th>
                                             </tr>
                                             </thead>
@@ -318,7 +319,18 @@
 <script>
 
     $(document).ready(function () {
-        authorizacion();
+        post($url.estado,{},'GET').then(data => {
+            if(!data.estado){
+                window.location.href = "/";
+            }else{
+                //$("#userId").val(data.userData.id);
+                $("#nameUser").html(data.userData.username);
+                $("#emailUser").html(data.userData.email);
+                $("#imgUser").attr("src",data.userData.img);
+                data.userData.token = localStorage.authorization;
+                $('.account').html(prettyPrintJson.toHtml(data.userData));
+            }
+        });
     });
 
 </script>
