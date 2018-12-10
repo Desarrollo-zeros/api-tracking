@@ -50,6 +50,11 @@ function url(){
     }, 15000);
 }
 
+function showPosition(position) {
+    localStorage.lat = position.coords.latitude;
+    localStorage.lng= position.coords.longitude;
+}
+
 function ulrData(){
     localStorage.dataUrl  =  JSON.stringify({
         "iniciar" : localStorage.url+"/api/users/iniciar",

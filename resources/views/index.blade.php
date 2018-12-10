@@ -93,11 +93,14 @@
         addurl();url();ulrData();
         $url = JSON.parse(localStorage.dataUrl);
 
-        if('{{env('GPS')}}' === 0){
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition,showError);
+        setTimeout(function () {
+            if('{{env('GPS')}}' === 0){
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition,showError);
+                }
             }
-        }
+        },1000);
+
         var lat = localStorage.lat != null ? localStorage.lat: null;
         var lng = localStorage.lng != null ? localStorage.lng: null;
         var uri = "/?lat="+lat+"&lng="+lng;

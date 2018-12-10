@@ -330,7 +330,6 @@
         addurl();url();ulrData();
         $url = JSON.parse(localStorage.dataUrl);
 
-
         var gps = window.location.href.split("?")[1] == null ? '' : "?"+window.location.href.split("?")[1];
         post($url.estado+gps,{},'GET').then(data => {
             if(!data.estado){
