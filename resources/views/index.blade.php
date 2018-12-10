@@ -65,7 +65,9 @@
 <script>
     $(document).ready(function () {
         authorizacion();
-        url();addurl();ulrData();
+        addurl();
+        url();ulrData();
+        $url = JSON.parse(localStorage.dataUrl);
     });
 
     function addurl() {
