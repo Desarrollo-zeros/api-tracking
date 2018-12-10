@@ -50,6 +50,8 @@ let post = (url = "",data = {},method = "",csrf_token = '') =>{
 
 
 function ulrData(){
+
+
     localStorage.dataUrl  =  JSON.stringify({
         "iniciar" : localStorage.url+"/api/users/iniciar",
         "registrar" : localStorage.url+"/api/users/registrar",

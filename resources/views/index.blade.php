@@ -65,18 +65,22 @@
 <script>
     $(document).ready(function () {
         authorizacion();
-        url();
+        url();addurl();ulrData();
     });
+
+    function addurl() {
+        @if(env('APP_ENV') === 'dev')
+            localStorage.url = '{{env('APP_URL_API')}}';
+        @elseif(env('APP_ENV') === 'production')
+            localStorage.url = '{{request()->url()}}';
+        @endif
+    }
 
     function url(){
         setTimeout(function () {
-            @if(env('APP_ENV') === 'dev')
-                localStorage.url = '{{env('APP_URL_API')}}';
-            @elseif(env('APP_ENV') === 'production')
-                localStorage.url = '{{request()->url()}}';
-            @endif
+            addurl();
             ulrData();
-        }, 1000);
+        }, 5000);
     }
 
     $("#btnRegister").click(function () {
