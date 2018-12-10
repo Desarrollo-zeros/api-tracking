@@ -65,21 +65,23 @@
         ppi: pixelRatio === 1 ? undefined : 320
     });
     //Step 2: initialize a map - this map is centered over Europe
-        @if (isset($lat) && isset($lng))
-    var map = new H.Map(document.getElementById('map'),
-        defaultLayers.normal.map,{
-            center: {lat:'{{$lat}}', lng:'{{$lng}}'},
-            zoom: 6,
-            pixelRatio: pixelRatio,
-        });
-        @else
-    var map = new H.Map(document.getElementById('map'),
-        defaultLayers.normal.map,{
-            center: {lat:4.5981, lng:-74.0758},
-            zoom: 6,
-            pixelRatio: pixelRatio
-        });
-    @endif
+
+
+        if(localStorage.lat == null && localStorage.lng == null){
+            var map = new H.Map(document.getElementById('map'),
+                defaultLayers.normal.map,{
+                    center: {lat:4.5981, lng:-74.0758},
+                    zoom: 2,
+                    pixelRatio: pixelRatio
+                });
+        }else{
+            var map = new H.Map(document.getElementById('map'),
+                defaultLayers.normal.map,{
+                    center: {lat:localStorage.lat, lng:localStorage.lng},
+                    zoom: 8,
+                    pixelRatio: pixelRatio
+                });
+        }
     //Step 3: make the map interactive
     // MapEvents enables the event system
     // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
