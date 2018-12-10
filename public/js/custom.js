@@ -46,7 +46,7 @@ $url  = localStorage.dataUrl == null ? "" : JSON.parse(localStorage.dataUrl);
 function url(){
     setTimeout(function () {
         addurl();
-        ulrData();
+        urlData();
     }, 15000);
 }
 
@@ -55,7 +55,7 @@ function showPosition(position) {
     localStorage.lng= position.coords.longitude;
 }
 
-function ulrData(){
+function urlData(){
     localStorage.dataUrl  =  JSON.stringify({
         "iniciar" : localStorage.url+"/api/users/iniciar",
         "registrar" : localStorage.url+"/api/users/registrar",

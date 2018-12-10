@@ -14,58 +14,45 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/custom.js"></script>
 <script  type="text/javascript" charset="UTF-8" >
-
     $ = jQuery;
+    var validar = false;
     /**
      * Adds markers to the map highlighting the locations of the captials of
      * France, Italy, Germany, Spain and the United Kingdom.
      *
      * @param  {H.Map} map      A HERE Map instance within the application
      */
-
-
     function addMarkersToMap(map) {
 
 
-        var vMpa =  '{{request()->get("map")}}';
-        var lat = '{{request()->get("lat")}}';
-        var lng = '{{request()->get("lng")}}';
-
-
-        if(vMpa != null){
-            if(vMpa == "all"){
-                post($url.ubicaciones,{},'GET').then(data =>{
-                    var ubicacion = data.ubicacion;
-                    if(ubicacion == null){
-                        //window.location.href = "/";
-                    }
+        @if (isset($lat) && isset($lng))
+            var localitations = new H.map.Marker({lat:'{{$lat}}', lng:'{{$lng}}',zoom:10});
+            map.addObject(localitations);
+            validar = true;
+        @elseif(isset($map))
+            post($url.ubicaciones,{},'GET').then(data =>{
+                for(var i in data){
+                    var localitations = new H.map.Marker({lat:data[i].latitud, lng:data[i].longitud});
+                    map.addObject(localitations);
+                    validar = true;
+                }
+            });
+        @else
+            post($url.verGps,{},'GET').then(data =>{
+                var ubicacion = data.ubicacion;
+                if(ubicacion != null){
                     for(var i in ubicacion){
                         var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
                         map.addObject(localitations);
                     }
-                });
-            }
-        }
-        else if(lat != null && lng != null){
-            var localitations = new H.map.Marker({lat:lat, lng:lng});
-            map.addObject(localitations);
-        }else{
-            post($url.verGps,{},'GET').then(data =>{
-                var ubicacion = data.ubicacion;
-                if(ubicacion == null){
-                    window.location.href = "/";
-                }
-                for(var i in ubicacion){
-                    var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
-                    map.addObject(localitations);
+                    validar = true;
                 }
             });
-        }
+        @endif
     }
     /**
      * Boilerplate map initialization code starts below:
      */
-
 //Step 1: initialize communication with the platform
     var platform = new H.service.Platform({
         app_id: '{{env('HERE_API_ID')}}',
@@ -75,58 +62,42 @@
     var pixelRatio = window.devicePixelRatio || 1;
     var defaultLayers = platform.createDefaultLayers({
         tileSize: pixelRatio === 1 ? 256 : 512,
-
         ppi: pixelRatio === 1 ? undefined : 320
     });
-
     //Step 2: initialize a map - this map is centered over Europe
-    @if (isset($lat) && isset($lng))
-       var map = new H.Map(document.getElementById('map'),
+        @if (isset($lat) && isset($lng))
+    var map = new H.Map(document.getElementById('map'),
         defaultLayers.normal.map,{
             center: {lat:'{{$lat}}', lng:'{{$lng}}'},
-            zoom: 7,
+            zoom: 6,
             pixelRatio: pixelRatio,
         });
-      @else
-        var lat   = localStorage.lat == null ? '4.5981' :  localStorage.lat;
-        var lng   = localStorage.lng == null ? '-74.0758' :  localStorage.lng;
-        var map = new H.Map(document.getElementById('map'),
-            defaultLayers.normal.map,{
-              center: {lat:lat, lng:lng},
-              zoom: 7,
-              pixelRatio: pixelRatio
-          });
+        @else
+    var map = new H.Map(document.getElementById('map'),
+        defaultLayers.normal.map,{
+            center: {lat:4.5981, lng:-74.0758},
+            zoom: 6,
+            pixelRatio: pixelRatio
+        });
     @endif
-
     //Step 3: make the map interactive
     // MapEvents enables the event system
     // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
     var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-
     // Create the default UI components
     var ui = H.ui.UI.createDefault(map, defaultLayers);
-
     // Now use the map as required..
     // .
     addMarkersToMap(map);
-
 </script>
 
 
 <script>
-
-    function auth(){
-        post($url.estado,{},'GET').then(data => {
-            if(!data.estado){
-                //window.location.href = "/";
-            }
-        });
-    }
-
-    $(document).ready(function () {
-        $url = JSON.parse(localStorage.dataUrl);
-        auth();
-    });
+    setTimeout(function () {
+        if(validar == false){
+            window.location.href = "/";
+        }
+    },3000);
 </script>
 </body>
 </html>

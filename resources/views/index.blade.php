@@ -90,7 +90,7 @@
 
 
     $(document).ready(function () {
-        addurl();url();ulrData();
+        addurl();url();urlData();
         $url = JSON.parse(localStorage.dataUrl);
         var lat = localStorage.lat != null ? localStorage.lat: null;
         var lng = localStorage.lng != null ? localStorage.lng: null;

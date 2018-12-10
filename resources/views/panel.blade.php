@@ -327,7 +327,7 @@
         }
     }
     $(document).ready(function () {
-        addurl();url();ulrData();
+        addurl();url();urlData();
         $url = JSON.parse(localStorage.dataUrl);
         if(window.location.href.split("?")[1] != null){
             var s = window.location.href.split("?")[1].split("&");
