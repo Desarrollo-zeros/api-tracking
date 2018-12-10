@@ -62,19 +62,38 @@
 </body>
 
 
+
 <script>
+    function showPosition(position) {
+        localStorage.lat = position.coords.latitude;
+        localStorage.lgn= position.coords.longitude;
+    }
+
     $(document).ready(function () {
         addurl();url();ulrData();
         $url = JSON.parse(localStorage.dataUrl);
-        post($url.estado,{},'GET').then(data => {
+
+        if('{{env('GPS')}}' === 0){
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+        }
+        var lat = localStorage.lat != null ? localStorage.lat: null;
+        var lng = localStorage.lng != null ? localStorage.lng: null;
+        var uri = $url.estado+"/?lat="+lat+"&lng="+lng;
+        post(uri,{},'GET').then(data => {
             if(!data.estado){
-                window.location.href = "/";
+               // window.location.href = "/";
             }
         });
     });
 
     function addurl() {
-        localStorage.url = '{{request()->url()}}';
+        if(window.location.href != '{{env('APP_URL_API')}}'){
+            localStorage.url = '{{env('APP_URL_API')}}';
+        }else{
+            localStorage.url = '{{request()->url()}}';
+        }
     }
 
     $("#btnRegister").click(function () {

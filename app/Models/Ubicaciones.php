@@ -59,7 +59,7 @@ class Ubicaciones extends Model
 
         if(isset($ubicacion)){
             $oldtime = !empty($ubicacion->last()) ? $ubicacion->last() : 0;
-            if(env("gps") == 1){
+            if(env("GPS") == 1){
                 if($oldtime->hora > 0){
                     //return ((int)$nowtime - (int)$oldtime->hora);
                     if(((int)$nowtime-(int)$oldtime->hora)>60){
@@ -72,7 +72,7 @@ class Ubicaciones extends Model
                     }
                 }
             }else{
-                //$gps = ["lat"=>request()->lat,"lng"=>request()->lng,"accuracy"=>""];
+                $gps = ["lat"=>request()->lat,"lng"=>request()->lng,"accuracy"=>""];
             }
         }
         $data = $this->registrarUbicacion($gps,$ip);

@@ -29,7 +29,7 @@ let post = (url = "",data = {},method = "",csrf_token = '') =>{
                     'Authorizations' : 'Bearer '+localStorage.authorization,
                 },
                 redirect: "follow", // manual, *follow, error
-                referrer: "no-referrer", // no-referrer, *client
+                referrer: "no-referrer", // no-referrer, *client,
             }).then(resp => {
                 if(resp.status == 500){
                    return false;
