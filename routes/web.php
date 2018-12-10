@@ -16,6 +16,12 @@
 });
 */
 
+/*
+if(env('APP_ENV') === 'production' || env('APP_ENV') === 'dev'){
+    $this->app['request']->server->set('HTTPS', true);
+    \URL::forceScheme('https');
+}*/
+
 Route::get('/','MainControllers@index');
 Route::get('/panel','MainControllers@panel');
 Route::get('/map','MainControllers@map');
