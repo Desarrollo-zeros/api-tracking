@@ -1,5 +1,4 @@
 
-
 let post = (url = "",data = {},method = "",csrf_token = '') =>{
     switch (method) {
         case 'POST':
@@ -42,16 +41,22 @@ let post = (url = "",data = {},method = "",csrf_token = '') =>{
     }
 };
 
+$url  = localStorage.dataUrl == null ? "" : JSON.parse(localStorage.dataUrl);
+
+function url(){
+    setTimeout(function () {
+        addurl();
+        ulrData();
+    }, 15000);
+}
 
 function ulrData(){
-
-
     localStorage.dataUrl  =  JSON.stringify({
         "iniciar" : localStorage.url+"/api/users/iniciar",
         "registrar" : localStorage.url+"/api/users/registrar",
         "estado" : localStorage.url+"/api/users/estado",
-        "panel" : localStorage.url+"/panel", //no api
-        "map" : localStorage.url+"/map", //no api
+        "panel" : localStorage.url1+"/panel", //no api
+        "map" : localStorage.url1+"/map", //no api
         "persona" : localStorage.url+"/api/users/persona",
         "guardarPersona" : localStorage.url+"/api/users/guardarPersona",
         "actualizarPersona" : localStorage.url+"/api/users/actualizarPersona",
@@ -73,14 +78,14 @@ var authorizacion = () => {
             window.location.href = "/";
         }
         if(localStorage.authorization != null && window.location.href.split("#")[0] == $url.panel){
-            if (navigator.geolocation) {
+            /*if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
-            }
+            }*/
             post($url.estado,{},'GET').then(data => {
                 if(!data.estado){
                     window.location.href = "/";
                 }
-                $("#userId").val(data.userData.id);
+                //$("#userId").val(data.userData.id);
                 $("#nameUser").html(data.userData.username);
                 $("#emailUser").html(data.userData.email);
                 $("#imgUser").attr("src",data.userData.img);
@@ -88,13 +93,22 @@ var authorizacion = () => {
                 $('.account').html(prettyPrintJson.toHtml(data.userData));
             });
         }
-        if(localStorage.authorization != null && window.location.href.split("#")[0] != $url.panel && window.location.href.split("#")[0] != $url.map) {
+
+        if(localStorage.authorization != null &&
+            window.location.href.split("#")[0] != $url.panel &&
+            window.location.href.split("?")[0] != $url.panel &&
+            window.location.href.split("/?")[0] != $url.panel &&
+            window.location.href.split("#")[0] != $url.map &&
+            window.location.href.split("?")[0] != $url.map &&
+            window.location.href.split("/?")[0] != $url.map){
             post($url.estado,{},'GET').then(data => {
                 if(data.estado){
                     window.location.href = $url.panel;
                 }
             });
         }
+
+
     }
     catch(e){return false;}
 };

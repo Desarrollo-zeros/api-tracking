@@ -65,24 +65,12 @@
 <script>
     $(document).ready(function () {
         authorizacion();
-        addurl();
-        url();ulrData();
+        addurl();url();ulrData();
         $url = JSON.parse(localStorage.dataUrl);
     });
 
     function addurl() {
-        @if(env('APP_ENV') === 'dev')
-            localStorage.url = '{{env('APP_URL_API')}}';
-        @elseif(env('APP_ENV') === 'production')
-            localStorage.url = '{{request()->url()}}';
-        @endif
-    }
-
-    function url(){
-        setTimeout(function () {
-            addurl();
-            ulrData();
-        }, 5000);
+        localStorage.url = '{{request()->url()}}';
     }
 
     $("#btnRegister").click(function () {
@@ -94,7 +82,6 @@
             $("#formRegister").css("display","none");
         $("#formLogin").css("display","block");
     });
-
 
     function passwordMatch() {
         var password, password2,btnFormRegister;

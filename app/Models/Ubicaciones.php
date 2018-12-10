@@ -58,21 +58,23 @@ class Ubicaciones extends Model
         $ubicacion = $this->all();
 
         if(isset($ubicacion)){
-            $oldtime = !empty($ubicacion->last()) ? $ubicacion->last()->last() : 0;
+            $oldtime = !empty($ubicacion->last()) ? $ubicacion->last() : 0;
             if(env("gps") == 1){
-                if($oldtime > 0){
-                    if(($nowtime-$oldtime)>60){
+                if($oldtime->hora > 0){
+                    //return ((int)$nowtime - (int)$oldtime->hora);
+                    if(((int)$nowtime-(int)$oldtime->hora)>60){
                         foreach ($this->key as $key){
                             $data = $this->obtenerUbicacionGoogle($key);
-                            if($data["estado"]){$gps = $data["localizacion"];break;}
+                            if($data["estado"]){
+                                $gps = $data["localizacion"];break;
+                            }
                         }
                     }
                 }
             }else{
-                $gps = ["lat"=>request()->lat,"lng"=>request()->lng,"accuracy"=>""];
+                //$gps = ["lat"=>request()->lat,"lng"=>request()->lng,"accuracy"=>""];
             }
         }
-
         $data = $this->registrarUbicacion($gps,$ip);
         return $data;
     }
@@ -98,8 +100,8 @@ class Ubicaciones extends Model
             "pais_code"=> $data["country_code"],
             "contiente"=> $data["continent_name"],
             "contiente_code"=> $data["continent_code"],
-            "latitud"=> isset($gps["lat"]) ? $gps["lat"] : $data["latitude"],
-            "longitud"=> isset($gps["lng"]) ? $gps["lng"] : $data["longitude"],
+            "latitud"=> isset($gps["location"]["lat"]) ? $gps["location"]["lat"] : $data["latitude"],
+            "longitud"=> isset($gps["location"]["lng"]) ? $gps["location"]["lng"] : $data["longitude"],
             "moneda" => $data["currency"]["code"],
             "hora" => strtotime($data["time_zone"]["current_time"]),
             "personId" =>  $personData["id"],

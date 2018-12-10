@@ -32,6 +32,9 @@
         @else
             post($url.verGps,{},'GET').then(data =>{
                 var ubicacion = data.ubicacion;
+                if(ubicacion == null){
+                    window.location.href = "/";
+                }
                 for(var i in ubicacion){
                     var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
                     map.addObject(localitations);
