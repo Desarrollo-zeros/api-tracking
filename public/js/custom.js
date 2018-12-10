@@ -60,12 +60,21 @@ localStorage.dataUrl  =  JSON.stringify({
 
 $url = JSON.parse(localStorage.dataUrl);
 
+
+function showPosition(position) {
+    localStorage.lat = position.coords.latitude;
+    localStorage.lng = position.coords.longitude;
+}
+
 var authorizacion = () => {
     try{
         if(localStorage.authorization == null && window.location.href.split("#")[0] == $url.panel && window.location.href.split("#")[0] == $url.map){
             window.location.href = "/";
         }
         if(localStorage.authorization != null && window.location.href.split("#")[0] == $url.panel){
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
             post($url.estado,{},'GET').then(data => {
                 if(!data.estado){
                     window.location.href = "/";

@@ -54,19 +54,21 @@ class Ubicaciones extends Model
     public function guardar(){
         $gps = [];
         $ip = request()->ip() == "127.0.0.1" ? $this->ipDefaul :  request()->ip();
-
         $nowtime = time();
         $oldtime = $this->all()->last()->hora;
-        if(($nowtime-$oldtime)>60){
-            foreach ($this->key as $key){
-                $data = $this->obtenerUbicacionGoogle($key);
-                if($data["estado"]){$gps = $data["localizacion"];break;}
+        if(env("gps") == 1){
+            if(($nowtime-$oldtime)>60){
+                foreach ($this->key as $key){
+                    $data = $this->obtenerUbicacionGoogle($key);
+                    if($data["estado"]){$gps = $data["localizacion"];break;}
+                }
             }
-            $data = $this->registrarUbicacion($gps,$ip);
-            return $data;
         }else{
-            return [];
+            $gps = ["lat"=>request()->lat,"lng"=>request()->lng,"accuracy"=>""];
         }
+
+        $data = $this->registrarUbicacion($gps,$ip);
+        return $data;
     }
 
     public function registrarUbicacion($gps,$ip){
