@@ -329,8 +329,13 @@
     $(document).ready(function () {
         addurl();url();ulrData();
         $url = JSON.parse(localStorage.dataUrl);
-
+        var s = window.location.href.split("?")[1].split("&");
+        if(s != null){
+            localStorage.lat = s[0].split("lat")[1].replace("=","");
+            localStorage.lng = s[1].split("lgn")[1].replace("=","");
+        }
         var gps = window.location.href.split("?")[1] == null ? '' : "?"+window.location.href.split("?")[1];
+
         post($url.estado+gps,{},'GET').then(data => {
             if(!data.estado){
                 window.location.href = "/";

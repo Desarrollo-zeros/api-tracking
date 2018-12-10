@@ -69,7 +69,6 @@
     function showError(error) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
-                alert()
                 alert("Usuario negó la solicitud de Geolocalización, para gestionar la ubicacion vuelva a cargar la pagina y permita conocer su ubicacion");
                 break;
             case error.POSITION_UNAVAILABLE:
@@ -89,18 +88,10 @@
         localStorage.lng= position.coords.longitude;
     }
 
+
     $(document).ready(function () {
         addurl();url();ulrData();
         $url = JSON.parse(localStorage.dataUrl);
-
-        setTimeout(function () {
-            if('{{env('GPS')}}' === 0){
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(showPosition,showError);
-                }
-            }
-        },1000);
-
         var lat = localStorage.lat != null ? localStorage.lat: null;
         var lng = localStorage.lng != null ? localStorage.lng: null;
         var uri = "/?lat="+lat+"&lng="+lng;
@@ -109,6 +100,16 @@
                 window.location.href = $url.panel+uri;
             }
         });
+
+        setTimeout(function () {
+            if('{{env('GPS')}}' == 0){
+                if(confirm("Para poder conocer su ubicacion por favor confirma su ubicacion")){
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(showPosition,showError);
+                    }
+                }
+            }
+        },2000);
     });
 
     function addurl() {
