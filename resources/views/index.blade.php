@@ -75,6 +75,7 @@
             @elseif(env('APP_ENV') === 'production')
                 localStorage.url = '{{request()->url()}}';
             @endif
+            ulrData();
         }, 1000);
     }
 

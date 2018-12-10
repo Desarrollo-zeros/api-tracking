@@ -8,9 +8,10 @@ let post = (url = "",data = {},method = "",csrf_token = '') =>{
                 method: method, // or 'PUT'
                 headers:{
                     "Content-Type": "application/json; charset=utf-8",
-                    'mode': 'cors',
+                    'mode': 'no-cors',
                     'authorization' : 'Bearer '+localStorage.authorization,
-                    "X-CSRF-TOKEN" : csrf_token
+                    "X-CSRF-TOKEN" : csrf_token,
+                    "Access-Control-Allow-Origin" : "*"
                 },
                 redirect: "follow", // manual, *follow, error
                 referrer: "no-referrer", // no-referrer, *client
@@ -29,9 +30,10 @@ let post = (url = "",data = {},method = "",csrf_token = '') =>{
                 method: method, // or 'PUT'
                 headers:{
                     "Content-Type": "application/json; charset=utf-8",
-                    'mode': 'cors',
+                    'mode': 'no-cors',
                     'Authorization' : 'Bearer '+localStorage.authorization,
-                    "X-CSRF-TOKEN" : csrf_token
+                    "X-CSRF-TOKEN" : csrf_token,
+                    "Access-Control-Allow-Origin" : "*"
                 },
                 redirect: "follow", // manual, *follow, error
                 referrer: "no-referrer", // no-referrer, *client
@@ -47,18 +49,22 @@ let post = (url = "",data = {},method = "",csrf_token = '') =>{
 };
 
 
-localStorage.dataUrl  =  JSON.stringify({
-    "iniciar" : localStorage.url+"/api/users/iniciar",
-    "registrar" : localStorage.url+"/api/users/registrar",
-    "estado" : localStorage.url+"/api/users/estado",
-    "panel" : localStorage.url+"/panel", //no api
-    "map" : localStorage.url+"/map", //no api
-    "persona" : localStorage.url+"/api/users/persona",
-    "guardarPersona" : localStorage.url+"/api/users/guardarPersona",
-    "actualizarPersona" : localStorage.url+"/api/users/actualizarPersona",
-    "verGps" : localStorage.url+"/api/users/verGps",
-    "ubicaciones" : localStorage+"api/users/ubicaciones"
-});
+function ulrData(){
+    localStorage.dataUrl  =  JSON.stringify({
+        "iniciar" : localStorage.url+"/api/users/iniciar",
+        "registrar" : localStorage.url+"/api/users/registrar",
+        "estado" : localStorage.url+"/api/users/estado",
+        "panel" : localStorage.url+"/panel", //no api
+        "map" : localStorage.url+"/map", //no api
+        "persona" : localStorage.url+"/api/users/persona",
+        "guardarPersona" : localStorage.url+"/api/users/guardarPersona",
+        "actualizarPersona" : localStorage.url+"/api/users/actualizarPersona",
+        "verGps" : localStorage.url+"/api/users/verGps",
+        "ubicaciones" : localStorage+"api/users/ubicaciones"
+    });
+
+}
+
 
 $url = JSON.parse(localStorage.dataUrl);
 
