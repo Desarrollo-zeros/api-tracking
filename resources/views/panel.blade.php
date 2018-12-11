@@ -311,15 +311,15 @@
     $(document).ready(function () {
         addurl();url();urlData();
         $url = JSON.parse(localStorage.dataUrl);
+        var gps = "";
         if(window.location.href.split("?")[1] != null){
             var s = window.location.href.split("?")[1].split("&");
             localStorage.lat = s[0].split("lat")[1].replace("=","");
             //localStorage.lat = localStorage.lat.replace("=","");
             localStorage.lng = s[1].split("lng")[1].replace("=","");
             //localStorage.lng = localStorage.lng.replace("=","");
+            gps = "lat="+localStorage.lat+"&lng="+localStorage.lng;
         }
-        var gps = window.location.href.split("?")[1] == null ? '' : "?"+window.location.href.split("?")[1];
-
         post($url.estado+gps,{},'GET').then(data => {
             if(!data.estado){
                 window.location.href = "{{env("APP_URL_API_SSL")}}";
