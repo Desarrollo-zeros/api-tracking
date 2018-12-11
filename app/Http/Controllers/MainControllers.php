@@ -30,8 +30,11 @@ class MainControllers extends Controller
     public function map(){
         $lat = request()->get("lat");
         $lng = request()->get("lng");
-        $map = \request()->get("map");
-        $usu = \request()->get("usu");
+        $map = empty(request()->get("map")) ? "all" : request()->get("map");
+        $usu = empty(request()->get("usu")) ? "true" : request()->get("usu");
+        if($lat == "null" || $lng == "null"){
+            redirect("/panel");
+        }
         return view('map',compact('lat','lng',"map","usu"));
     }
 }
