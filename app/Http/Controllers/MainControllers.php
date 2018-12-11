@@ -30,10 +30,13 @@ class MainControllers extends Controller
     public function map(){
         $lat = request()->get("lat");
         $lng = request()->get("lng");
-        $map = empty(request()->get("map")) ? "all" : request()->get("map");
-        $usu = empty(request()->get("usu")) ? "true" : request()->get("usu");
-        if(!is_numeric($lat) || !is_numeric($lng)){
-            redirect("/panel");
+        $map = request()->get("map");
+        $usu = request()->get("usu");
+        
+        if(!isset($map) && !isset($usu)){
+            if(!is_numeric($lat) || !is_numeric($lng)){
+                redirect("/panel");
+            }
         }
         return view('map',compact('lat','lng',"map","usu"));
     }
