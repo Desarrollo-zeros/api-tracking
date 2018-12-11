@@ -318,7 +318,7 @@
             //localStorage.lat = localStorage.lat.replace("=","");
             localStorage.lng = s[1].split("lng")[1].replace("=","");
             //localStorage.lng = localStorage.lng.replace("=","");
-            gps = "lat="+localStorage.lat+"&lng="+localStorage.lng;
+            gps = "?lat="+localStorage.lat+"&lng="+localStorage.lng;
         }
         post($url.estado+gps,{},'GET').then(data => {
             if(!data.estado){
