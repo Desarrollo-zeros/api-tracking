@@ -207,7 +207,7 @@ $("#formPersons").on("submit",function (form) {
             if(data.estado == true){
                 $.notify("Datos guardados con exito","success")
             }else{
-                $.notify(data,"error")
+                $.notify(JSON.stringify(data),"error")
             }
         });
     }else{
@@ -216,7 +216,7 @@ $("#formPersons").on("submit",function (form) {
             if(data.estado == true){
                 $.notify("Datos Actualizados con exito","success")
             }else{
-                $.notify("Revisa los datos, no se permiten campos vacios","error")
+                $.notify(JSON.stringify(data),"error")
             }
         });
     }

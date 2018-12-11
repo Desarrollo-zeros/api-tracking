@@ -177,7 +177,7 @@
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label class="control-label" id>Segundo Nombre</label>
-                                                            <input id="second_name" name="second_name" type="text" placeholder="Segundo Nombre" value=""  class="form-control" required="required" pattern="[A-Za-z]{0,10}">
+                                                            <input id="second_name" name="second_name" type="text" placeholder="Segundo Nombre" value=""  class="form-control"  pattern="[A-Za-z]{0,10}">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                             <label class="control-label">Primer Apellido</label>

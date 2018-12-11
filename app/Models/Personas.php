@@ -53,10 +53,10 @@ class Personas extends Model
     public function validar(){
         $persona["registrar"] = [
             'identificacion' => 'required|string|max:10|min:8|unique:personas',
-            'primerNombre' => 'required|string|max:255|min:3',
-            'segundoNombre' => 'string|max:255|min:3',
+            'primerNombre' => 'required|string|max:50|min:3',
+            'segundoNombre' => 'string|max:50|min:0',
             'primerApellido' => 'required|string|max:255|min:3',
-            'segundoApellido' => 'required|string|max:255|min:3',
+            'segundoApellido' => 'required|string|max:255|min:3|max:50',
             'password1' => 'string',
             'password2' => 'string',
             'img' => 'string',
@@ -65,10 +65,10 @@ class Personas extends Model
 
         $persona["actualizar"] = [
             'id' => 'required|int',
-            'primerNombre' => 'required|string|max:255|min:3',
-            'segundoNombre' => 'string|max:255|min:3',
-            'primerApellido' => 'required|string|max:255|min:3',
-            'segundoApellido' => 'required|string|max:255|min:3',
+            'primerNombre' => 'required|string|max:50|min:3',
+            'segundoNombre' => 'string|max:50|min:0',
+            'primerApellido' => 'required|string|max:50|min:3',
+            'segundoApellido' => 'required|string|max:50|min:3',
             'password1' => 'string',
             'password2' => 'string',
             'img' => 'string'
