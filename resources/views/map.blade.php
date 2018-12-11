@@ -50,6 +50,9 @@
             });
         @endif
 
+        @if(!isset($usu) && !isset($map) && !isset($lat) && !isset($lng))
+            window.location.href = "/panel";
+        @endif
     }
     /**
      * Boilerplate map initialization code starts below:

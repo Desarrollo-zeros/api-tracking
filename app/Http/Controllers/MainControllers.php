@@ -32,7 +32,7 @@ class MainControllers extends Controller
         $lng = request()->get("lng");
         $map = request()->get("map");
         $usu = request()->get("usu");
-        
+
         if(!isset($map) && !isset($usu)){
             if(!is_numeric($lat) || !is_numeric($lng)){
                 redirect("/panel");
