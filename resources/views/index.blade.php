@@ -94,7 +94,7 @@
         $url = JSON.parse(localStorage.dataUrl);
         var lat = localStorage.lat != null ? localStorage.lat: null;
         var lng = localStorage.lng != null ? localStorage.lng: null;
-        var uri = "/?lat="+lat+"&lng="+lng;
+        var uri = "?lat="+lat+"&lng="+lng;
         post($url.estado,{},'GET').then(data => {
             if(data.estado){
                 window.location.href = $url.panel+uri;
