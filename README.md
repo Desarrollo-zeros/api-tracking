@@ -103,13 +103,13 @@ Rest api guardarPersona, esta funcion guarda los datos de la persona, solo se pu
 
         $persona["registrar"] = [
             'identificacion' => 'required|string|max:10|min:8|unique:personas',
-            'primerNombre' => 'required|string|max:255|min:3',
-            'segundoNombre' => 'string|max:255|min:3',
+            'primerNombre' => 'required|string|max:50|min:3',
+            'segundoNombre' => 'string|max:50|min:0',
             'primerApellido' => 'required|string|max:255|min:3',
-            'segundoApellido' => 'required|string|max:255|min:3',
-            'password1' => 'string',//opcional para actualizar
-            'password2' => 'string', //opcional para actualizar
-            'img' => 'string', //imagen encriptada base64 opcional
+            'segundoApellido' => 'required|string|max:255|min:3|max:50',
+            'password1' => 'string',
+            'password2' => 'string',
+            'img' => 'string',
             'userId' => 'required|unique:personas'
         ];
 ![img](http://tracking-api.cf:8000/img/test-api/postman/guardarPersona.png)
