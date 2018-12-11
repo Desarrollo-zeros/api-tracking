@@ -188,17 +188,28 @@ JWT time to live
 
 1. Probar con ssl Web, paso
 
+- <h1>Plantila login</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/plantilla-login.png)
+- <h1>Desbloquear SSL</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/debloquear-ssl.png)
+- <h1>Usar GPS</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/usar-Gps.png)
+- <h1>Activar GPS</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/activar-Geo.png)
+- <h1>Registrar Usuario</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/datos-registrar.png)
+- <h1>Iniciar Sesíon</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/datos-Login.png)
+- <h1>Panel Control</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/plantilla-panel.png)
+- <h1>Guardar Datos personas y actualizar (contraseña,img)</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/editar-guardar-persona.png)
+- <h1>Panel ubicaciones de usuario</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/panel-geo1.png)
 ![img](http://tracking-api.cf:8000/img/test-api/web/panel-geo2.png)
+- <h1>Ubicacion a revisar por usuario</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/mapa-get.png)
-![img](http://tracking-api.cf:8000/img/test-api/web/mapa-get.png)
+- <h1>Todas las ubicaciones del usuario</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/mapa-usuario.png)
+- <h1>Todas las actividades de todos los usuarios</h1>
 ![img](http://tracking-api.cf:8000/img/test-api/web/mapa-all-usuarios.png)
