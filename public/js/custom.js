@@ -190,7 +190,11 @@ $("#formPersons").on("submit",function (form) {
     }
     if($("#second_surname").val() != ""){
         obj.segundoApellido = $("#second_surname").val();
+    }else{
+        obj.segundoApellido = " ";
     }
+
+
     if ($("#imgFile").val() != ""){
         obj.img = $("#imgPerson").val();
     }
@@ -201,6 +205,8 @@ $("#formPersons").on("submit",function (form) {
     }else{
         validatePassword();
     }
+
+
     obj.userId = $("#userId").val();
     if($("#personId").val() == ""){
         post($url.guardarPersona,obj,'POST').then(data => {
