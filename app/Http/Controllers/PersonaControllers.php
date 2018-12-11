@@ -35,7 +35,7 @@ class PersonaControllers extends Controller
             "primerNombre" => $request->primerNombre,
             "segundoNombre" => $request->segundoNombre,
             "primerApellido" => $request->primerApellido,
-            "segundoAPellido" => $request->segundoAPellido,
+            "segundoApellido" => $request->segundoAPellido,
         ];
         $personData = $this->persona->registrar($userData);
 
