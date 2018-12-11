@@ -30,5 +30,6 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('users/persona','PersonaControllers@ver');
     Route::post('users/guardarPersona','PersonaControllers@registrar');
     Route::post('users/actualizarPersona','PersonaControllers@actualizar');
-    Route::get('users/verGps',"UbicacionControllers@ver");
+    Route::get('users/verGps','UbicacionControllers@ver');
+    Route::get('users/guardarUbicacion','UbicacionControllers@guardar');
 });

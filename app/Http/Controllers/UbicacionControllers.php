@@ -24,8 +24,8 @@ class UbicacionControllers extends Controller
         }
     }
 
-    public function guardar(Request $reques){
-        return response()->json($this->ubicacion->guardarMiUbicacion());
+    public function guardar(){
+        return response()->json($this->ubicacion->guardar());
     }
 
     public function ver(){
