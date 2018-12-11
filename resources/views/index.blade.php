@@ -107,6 +107,8 @@
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(showPosition,showError);
                     }
+                }else{
+                    console.log("hi");
                 }
             }
         },2000);

@@ -31,6 +31,7 @@ class MainControllers extends Controller
         $lat = request()->get("lat");
         $lng = request()->get("lng");
         $map = \request()->get("map");
-        return view('map',compact('lat','lng',"map"));
+        $usu = \request()->get("usu");
+        return view('map',compact('lat','lng',"map","usu"));
     }
 }

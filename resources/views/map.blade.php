@@ -37,7 +37,7 @@
                     validar = true;
                 }
             });
-        @else
+        @elseif(isset($usu))
             post($url.verGps,{},'GET').then(data =>{
                 var ubicacion = data.ubicacion;
                 if(ubicacion != null){
@@ -48,6 +48,8 @@
                     validar = true;
                 }
             });
+        @else
+            window.location.href = "/";
         @endif
     }
     /**

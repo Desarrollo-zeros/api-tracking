@@ -129,7 +129,7 @@
                 <li class="active"><a href="#"> <i class="icon-home"></i>Inicio </a></li>
                 <li><a href="#formPersons" onclick="$('#dashboard-Info').css('display','block');$('#tablaUsers').css('display','none');loaderPerson()"> <i class="fa fa-info"></i>Informacion Personal </a></li>
                 <li><a href="#tablaUsers" onclick="$('#dashboard-Info').css('display','none');$('#tablaUsers').css('display','block');loaderTableuser()"> <i class="fa fa-google-plus-square"></i>Localizacíones </a></li>
-                <li><a href="/map" target="_blank"> <i class="fa fa-google-plus-square"></i>Mostrar Actividad Mapa </a></li>
+                <li><a href="/map?usu=true" target="_blank"> <i class="fa fa-google-plus-square"></i>Mostrar Actividad Mapa </a></li>
                 <li><a href="#" onclick="localStorage.authorization = null; window.location.href ='/';"> <i class="fa fa-sign-out"></i>Cerrar Sesíon </a></li>
             </ul>
         </nav>
