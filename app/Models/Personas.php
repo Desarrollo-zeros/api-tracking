@@ -37,7 +37,6 @@ class Personas extends Model
     }
 
     public function registrar($data){
-        $data["userId"] =
         $persona = new Personas();
         $persona->fill($data)->save();
         return $persona;
