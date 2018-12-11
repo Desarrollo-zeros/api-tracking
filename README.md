@@ -54,7 +54,9 @@ Header
 ` "Content-Type": "application/json; charset=utf-8",
   "Authorizations" : "Bearer token"`
 
+![img](http://tracking-api.cf:8000/img/test-api/postman/header.png)
 
+- <h3>POST registrar</h3> -
 Rest api registrar, registra el usuario
 - `http://tracking-api.cf:8000/api/users/registrar`-
 
@@ -64,8 +66,9 @@ Rest api registrar, registra el usuario
              'password' => 'required'
          ];
  
-- POST registrar -
-- <img> -- <img>
+![img](http://tracking-api.cf:8000/img/test-api/postman/registrar.png)
+
+- <h3>POST Iniciar</h3>-
 
 Rest api Iniciar, este funciona para la creacion de token y validacion del sistema 
 - `http://tracking-api.cf:8000/api/users/iniciar`-
@@ -75,20 +78,25 @@ Rest api Iniciar, este funciona para la creacion de token y validacion del siste
              'password' => 'required'
         ];
 
-- POST Iniciar-
-- <img> -- <img>
+
+![img](http://tracking-api.cf:8000/img/test-api/postman/iniciar.png)
+
+
+- <h3>GET estado</h3>
 
 Rest api estado, esta funcion devuelve un token y datos del usuario, tambien guarda la ubicacion (sea por ip, google api, html5 api)
 
 - `http://tracking-api.cf:8000/api/users/estado`-
-- GET estado
-- <img> -- <img>
+![img](http://tracking-api.cf:8000/img/test-api/postman/estado.png)
 
+
+- <h3>GET persona</h3>
 Rest api Persona, esta funcion devuelve los datos personales de la persona
 - `http://tracking-api.cf:8000/api/users/persona`-
-- GET persona
-- <img> -- <img>
 
+![img](http://tracking-api.cf:8000/img/test-api/postman/persona.png)
+
+- <h3>POST guardarPersona</h3>
 
 Rest api guardarPersona, esta funcion guarda los datos de la persona, solo se puede crear una persona por usuario, tambien 
 - `http://tracking-api.cf:8000/api/users/guardarPersona`-
@@ -104,12 +112,11 @@ Rest api guardarPersona, esta funcion guarda los datos de la persona, solo se pu
             'img' => 'string', //imagen encriptada base64 opcional
             'userId' => 'required|unique:personas'
         ];
-- POST guardarPersona
-- <img> -- <img>
+![img](http://tracking-api.cf:8000/img/test-api/postman/guardarPersona.png)
 
+- <h3>POST actualizarPersona</h3>
 
-
-Rest api guardarPersona, esta funcion guarda los datos de la persona
+Rest api actualizarPersona, esta funcion guarda los datos de la persona
 - `http://tracking-api.cf:8000/api/users/actualizarPersona`-
 
         $persona["actualizar"] = [
@@ -122,20 +129,24 @@ Rest api guardarPersona, esta funcion guarda los datos de la persona
             'password2' => 'string',
             'img' => 'string'
         ];
-- POST guardarPersona
-- <img> -- <img>
 
+![img](http://tracking-api.cf:8000/img/test-api/postman/actualizarPersona.png)
+
+
+- <h3>GET verGps</h3>
 Rest api verGps, esta funcion devuelve la ubicaciones del usuario, Es necesario que el usuario tenga una persona creada
 - `http://tracking-api.cf:8000/api/users/verGps`-
-- GET persona
-- <img> -- <img>
+![img](http://tracking-api.cf:8000/img/test-api/postman/verGps.png)
 
 
+- <h3>GET ubicaciones</h3>
 Rest api ubicaciones, esta funcion devuelve la ubicaciones de todos los usuarios (no se requiere token (opcional)) test -> posible rol 
 
 - `http://tracking-api.cf:8000/api/users/ubicaciones`-
-- GET persona
-- <img> -- <img>
+![img](http://tracking-api.cf:8000/img/test-api/postman/ubicaciones.png)
+
+
+- GET <h3>guardarUbicacion</h3>
 
 Rest api guardarUbicacion, registra la ubicacion donde se encuentra el usuario puede ser 
 - [googleApi] -> env("GPS") == 1, si ocurre un fallo en google api esta usa localizacion por ip (no es exacto)
@@ -143,9 +154,11 @@ Rest api guardarUbicacion, registra la ubicacion donde se encuentra el usuario p
 
  `http://tracking-api.cf:8000/api/users/guardarUbicacion`-
 
-- GET persona
-- <img> -- <img>
+ `env("GPS") == 1` -> use google api o localizador por ip
+![img](http://tracking-api.cf:8000/img/test-api/postman/guardarUbicacion.png)
 
+`env("GPS") != 1` -> enviar get, (lat y lng) se puede obtener por la API de html5 geolocalizador
+![img](http://tracking-api.cf:8000/img/test-api/postman/guardarUbicacion1.png)
 
 - Como se valida si el token existe-> la forma como se validan datos son extendidas por JWT al Middleware Authenticate, por lo tanto esta valida el hash y usuario creado.
 
@@ -164,4 +177,28 @@ JWT time to live
 [
     "status"=>"Token is Invalid"
 ]
+![img](http://tracking-api.cf:8000/img/test-api/postman/errorToken.png)
 
+
+<h1>Testear api web</h1>
+- link ssl opciona = https://tracking-api.cf<br>
+
+- link http://tracking-api.cf:8000<br>
+
+
+1. Probar con ssl Web, paso
+
+![img](http://tracking-api.cf:8000/img/test-api/web/plantilla-login.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/debloquear-ssl.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/usar-Gps.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/activar-Geo.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/datos-registrar.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/datos-Login.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/plantilla-panel.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/editar-guardar-persona.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/panel-geo1.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/panel-geo2.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/mapa-get.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/mapa-get.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/mapa-usuario.png)
+![img](http://tracking-api.cf:8000/img/test-api/web/mapa-all-usuarios.png)
