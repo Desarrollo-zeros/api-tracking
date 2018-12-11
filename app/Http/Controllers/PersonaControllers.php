@@ -27,7 +27,7 @@ class PersonaControllers extends Controller
         $id = $this->users["userData"]["id"];
 
         $userData = [
-            "userId" => isset($request->userId) ?? $id, //opcional post userId, si no la manda el usuario puede usarse la del token
+            "userId" => isset($request->userId) ? $request->userId : $id, //opcional post userId, si no la manda el usuario puede usarse la del token
             "identificacion" => $request->identificacion,
             "primerNombre" => $request->primerNombre,
             "segundoNombre" => $request->segundoNombre,
