@@ -32,7 +32,7 @@ class MainControllers extends Controller
         $lng = request()->get("lng");
         $map = empty(request()->get("map")) ? "all" : request()->get("map");
         $usu = empty(request()->get("usu")) ? "true" : request()->get("usu");
-        if($lat == "null" || $lng == "null"){
+        if(!is_numeric($lat) || !is_numeric($lng)){
             redirect("/panel");
         }
         return view('map',compact('lat','lng',"map","usu"));

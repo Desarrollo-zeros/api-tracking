@@ -22,19 +22,23 @@
      * @param  {H.Map} map      A HERE Map instance within the application
      */
     function addMarkersToMap(map) {
-
-
         @if (isset($lat) && isset($lng))
-            var localitations = new H.map.Marker({lat:'{{$lat}}', lng:'{{$lng}}',zoom:10});
-            map.addObject(localitations);
-        @elseif(isset($map))
+            if('{{$lat}}' != "null" && '{{$lng}}' != 'null'){
+                var localitations = new H.map.Marker({lat:'{{$lat}}', lng:'{{$lng}}',zoom:10});
+                map.addObject(localitations);
+            }
+        @endif
+
+        @if(isset($map))
             post($url.ubicaciones,{},'GET').then(data =>{
                 for(var i in data){
                     var localitations = new H.map.Marker({lat:data[i].latitud, lng:data[i].longitud});
                     map.addObject(localitations);
                 }
             });
-        @elseif(isset($usu))
+        @endif
+
+        @if(isset($usu))
             post($url.verGps,{},'GET').then(data =>{
                 var ubicacion = data.ubicacion;
                 if(ubicacion != null){
@@ -44,9 +48,8 @@
                     }
                 }
             });
-        @else
-            window.location.href = "{{env("APP_URL_API_SSL")}}";
         @endif
+
     }
     /**
      * Boilerplate map initialization code starts below:
