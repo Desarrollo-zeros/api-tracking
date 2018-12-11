@@ -30,7 +30,7 @@ class PersonaControllers extends Controller
             "userId" => isset($request->userId) ? $request->userId : $id, //opcional post userId, si no la manda el usuario puede usarse la del token
             "identificacion" => $request->identificacion,
             "primerNombre" => $request->primerNombre,
-            "segundoNombre" => $request->segundoNombre,
+            "segundoNombre" => isset($request->segundoNombre) ? $request->segundoNombre : " ",
             "primerApellido" => $request->primerApellido,
             "segundoApellido" => $request->segundoApellido,
         ];
@@ -66,7 +66,7 @@ class PersonaControllers extends Controller
         $personData = $this->persona->actualizar($request->id,
             [
                 "primerNombre"=>$request->primerNombre,
-                "segundoNombre"=>$request->segundoNombre,
+                "segundoNombre" => isset($request->segundoNombre) ? $request->segundoNombre : " ",
                 "primerApellido"=>$request->primerApellido,
                 "segundoApellido"=>$request->segundoApellido,
             ]
