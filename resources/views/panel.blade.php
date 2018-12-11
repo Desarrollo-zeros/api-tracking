@@ -88,7 +88,7 @@
                             </ul>
                         </li>
                         <!-- Logout    -->
-                        <li class="nav-item"><a href="#" onclick="localStorage.authorization = null; window.location.href ='/';" class="nav-link logout"> <span class="d-none d-sm-inline">Cerrar Sesíon</span><i class="fa fa-sign-out"></i></a></li>
+                        <li class="nav-item"><a href="#" onclick="localStorage.authorization = null; window.location.href ='/'; deleteCookie('token');" class="nav-link logout"> <span class="d-none d-sm-inline">Cerrar Sesíon</span><i class="fa fa-sign-out"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <li><a href="#formPersons" onclick="$('#dashboard-Info').css('display','block');$('#tablaUsers').css('display','none');loaderPerson()"> <i class="fa fa-info"></i>Informacion Personal </a></li>
                 <li><a href="#tablaUsers" onclick="$('#dashboard-Info').css('display','none');$('#tablaUsers').css('display','block');loaderTableuser()"> <i class="fa fa-google-plus-square"></i>Localizacíones </a></li>
                 <li><a href="/map?usu=true" target="_blank"> <i class="fa fa-google-plus-square"></i>Mostrar Actividad Mapa </a></li>
-                <li><a href="#" onclick="localStorage.authorization = null; window.location.href ='/';"> <i class="fa fa-sign-out"></i>Cerrar Sesíon </a></li>
+                <li><a href="#" onclick="localStorage.authorization = null; window.location.href ='/';deleteCookie('token');"> <i class="fa fa-sign-out"></i>Cerrar Sesíon </a></li>
             </ul>
         </nav>
         <div class="content-inner">
