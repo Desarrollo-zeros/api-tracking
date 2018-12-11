@@ -322,7 +322,7 @@
 
         post($url.estado+gps,{},'GET').then(data => {
             if(!data.estado){
-                window.location.href = "/";
+                window.location.href = "{{env("APP_URL_API_SSL")}}";
             }else{
                 //$("#userId").val(data.userData.id);
                 $("#nameUser").html(data.userData.username);

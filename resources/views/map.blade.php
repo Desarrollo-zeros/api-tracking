@@ -15,7 +15,6 @@
 <script src="/js/custom.js"></script>
 <script  type="text/javascript" charset="UTF-8" >
     $ = jQuery;
-    var validar = false;
     /**
      * Adds markers to the map highlighting the locations of the captials of
      * France, Italy, Germany, Spain and the United Kingdom.
@@ -28,13 +27,11 @@
         @if (isset($lat) && isset($lng))
             var localitations = new H.map.Marker({lat:'{{$lat}}', lng:'{{$lng}}',zoom:10});
             map.addObject(localitations);
-            validar = true;
         @elseif(isset($map))
             post($url.ubicaciones,{},'GET').then(data =>{
                 for(var i in data){
                     var localitations = new H.map.Marker({lat:data[i].latitud, lng:data[i].longitud});
                     map.addObject(localitations);
-                    validar = true;
                 }
             });
         @elseif(isset($usu))
@@ -45,11 +42,10 @@
                         var localitations = new H.map.Marker({lat:ubicacion[i].latitud, lng:ubicacion[i].longitud});
                         map.addObject(localitations);
                     }
-                    validar = true;
                 }
             });
         @else
-            window.location.href = "/";
+            window.location.href = "{{env("APP_URL_API_SSL")}}";
         @endif
     }
     /**
@@ -93,13 +89,5 @@
     addMarkersToMap(map);
 </script>
 
-
-<script>
-    setTimeout(function () {
-        if(validar == false){
-            window.location.href = "/";
-        }
-    },3000);
-</script>
 </body>
 </html>
