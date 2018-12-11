@@ -81,7 +81,7 @@
                         <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope-o"></i><span class="badge bg-orange badge-corner">10</span></a>
                         </li>
                         <!-- Languages dropdown    -->
-                        <li class="nav-item dropdown"><a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/co.png" alt="Español"><span class="d-none d-sm-inline-block">Español</span></a>
+                        <li class="nav-item dropdown"><a id="languages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link language dropdown-toggle"><img src="img/flags/16/CO.png" alt="Español"><span class="d-none d-sm-inline-block">Español</span></a>
                             <ul aria-labelledby="languages" class="dropdown-menu">
                                 <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/AR.png" alt="Español" class="mr-2">Español</a></li>
                                 <li><a rel="nofollow" href="#" class="dropdown-item"> <img src="img/flags/16/FR.png" alt="Ingles" class="mr-2">Ingles</a></li>
