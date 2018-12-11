@@ -25,20 +25,21 @@ class PersonaControllers extends Controller
 
     public function registrar(Request $request){
         $id = $this->users["userData"]["id"];
-        $validator = Validator::make($request->all(), $this->persona->validar()["registrar"]);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
-        }
+
         $userData = [
-            "userId" => isset($request->userId) ?? $id,
+            "userId" => isset($request->userId) ?? $id, //opcional post userId, si no la manda el usuario puede usarse la del token
             "identificacion" => $request->identificacion,
             "primerNombre" => $request->primerNombre,
             "segundoNombre" => $request->segundoNombre,
             "primerApellido" => $request->primerApellido,
             "segundoApellido" => $request->segundoApellido,
         ];
-        $personData = $this->persona->registrar($userData);
 
+        $validator = Validator::make($userData, $this->persona->validar()["registrar"]);
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+        $personData = $this->persona->registrar($userData);
         if(strlen($request->img)>10){
             $data["img"] = $request->img;
         }
