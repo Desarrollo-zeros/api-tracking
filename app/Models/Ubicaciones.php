@@ -72,7 +72,7 @@ class Ubicaciones extends Model
                     }
                 }
             }else{
-                $gps["location"] = ["lat"=>(float)request()->get("lat"),"lng"=>(float)request()->get("lng")];
+                $gps["location"] = ["lat"=>request()->get("lat"),"lng"=>request()->get("lng")];
             }
         }
         $data = $this->registrarUbicacion($gps,$ip);
