@@ -25,8 +25,6 @@ Route::get('users/ubicaciones',function (){
     return response()->json(\Illuminate\Support\Facades\DB::table("ubicaciones")->get());
 });
 
-
-
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('users/estado', 'UsuarioControllers@estado');
     Route::get('users/persona','PersonaControllers@ver');

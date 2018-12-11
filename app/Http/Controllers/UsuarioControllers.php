@@ -58,6 +58,7 @@ class UsuarioControllers extends Controller
 
     public function estado(){
         $users = $this->usuario->api_Auth();
+        $ubicacion = [];
         if($users["estado"]){
             $persona = $this->usuario->obtenerPersonaDeUsuario($users["userData"]["id"]);
             if(isset($persona)){
