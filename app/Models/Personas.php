@@ -11,7 +11,7 @@ class Personas extends Model
     public $timestamps = false;
     protected  $table = 'personas',
         $fillable = ['id','identificacion','primerNombre','segundoNombre','primerApellido','segundoApellido','userId'];
-    private $db = null;
+    private $db = null,$usuario=null,$users=null;
 
 
     public function __construct()
@@ -37,6 +37,7 @@ class Personas extends Model
     }
 
     public function registrar($data){
+        $data["userId"] =
         $persona = new Personas();
         $persona->fill($data)->save();
         return $persona;

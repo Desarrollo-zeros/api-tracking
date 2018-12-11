@@ -54,7 +54,7 @@ Header
 ` "Content-Type": "application/json; charset=utf-8",
   "Authorizations" : "Bearer token"`
 
-![img](http://tracking-api.cf:8000/img/test-api/postman/header.png)
+![img](http://tracking-api.cf:8000/img/test-api/postman/cabezera.png)
 
 - <h3>POST registrar</h3> -
 Rest api registrar, registra el usuario

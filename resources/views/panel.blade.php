@@ -324,7 +324,7 @@
             if(!data.estado){
                 window.location.href = "{{env("APP_URL_API_SSL")}}";
             }else{
-                //$("#userId").val(data.userData.id);
+                $("#userId").val(data.userData.id);
                 $("#nameUser").html(data.userData.username);
                 $("#emailUser").html(data.userData.email);
                 $("#imgUser").attr("src",data.userData.img);
